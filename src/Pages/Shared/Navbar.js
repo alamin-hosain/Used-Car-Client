@@ -1,19 +1,20 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import logo from '../../assets/logo.png';
 import { AuthContext, logOut } from '../../contexts/AuthProvider';
+import './Navbar.module.css';
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
 
   const menuItems = <>
-    <li><Link to='/'>Home</Link></li>
-    <li><Link to='/category'>Category</Link></li>
-    <li><Link to='/contact'>Contact</Link></li>
-    <li><Link to='/review'>Review</Link></li>
+    <li><NavLink to='/'>Home</NavLink></li>
+    <li><NavLink to='/category'>Category</NavLink></li>
+    <li><NavLink to='/contact'>Contact</NavLink></li>
+    <li><NavLink to='/review'>Review</NavLink></li>
     {
-      user ? <><li onClick={logOut} className='lg:hidden'><Link to='/login'>Log Out</Link></li></> :
-        <li className='lg:hidden'><Link to='/login'>Login</Link></li>
+      user ? <><li onClick={logOut} className='lg:hidden'><NavLink to='/login'>Log Out</NavLink></li></> :
+        <li className='lg:hidden'><NavLink to='/login'>Login</NavLink></li>
     }
 
   </>

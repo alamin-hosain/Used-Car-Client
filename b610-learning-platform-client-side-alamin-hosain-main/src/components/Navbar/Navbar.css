@@ -1,0 +1,16 @@
+a:hover {
+    color: #098b99;
+}
+
+.logo {
+    width: 100px;
+}
+
+.photoURL img {
+    width: 35px;
+    height: 35px;
+}
+
+.active {
+    color: #098b99;
+}

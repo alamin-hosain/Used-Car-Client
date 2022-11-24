@@ -1,0 +1,34 @@
+.courses {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+
+}
+
+@media screen and (max-width: 768px) {
+
+    .courses {
+        display: flex;
+        flex-direction: column;
+    }
+
+
+    .lefside {
+        text-align: center;
+        padding: 10px;
+    }
+
+    .under-order-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 13px;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.header-section {
+    height: 150px;
+    background-color: #0093E9;
+    background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+
+}
