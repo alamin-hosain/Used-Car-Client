@@ -9,6 +9,7 @@ const Navbar = () => {
     <li><Link to='/blog'>Blog</Link></li>
     <li><Link to='/contact'>Contact</Link></li>
     <li><Link to='/review'>Review</Link></li>
+    <li className='lg:hidden'><Link to='/review'>Login</Link></li>
   </>
 
 
@@ -24,7 +25,7 @@ const Navbar = () => {
           </ul>
         </div>
         <div>
-          <Link className="btn btn-ghost normal-case text-xl">
+          <Link to='/' className="btn btn-ghost normal-case text-xl">
             <img className='w-40' src={logo} alt="" />
           </Link>
         </div>
@@ -35,7 +36,7 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <Link className="btn btn-primary font-normal tracking-wider text-white">Login Now</Link>
+        <Link to='/login' className="btn btn-primary font-normal tracking-wider text-white ">Login Now</Link>
       </div>
     </div>
   )
