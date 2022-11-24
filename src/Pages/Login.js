@@ -1,9 +1,13 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import toast from 'react-hot-toast';
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../contexts/AuthProvider'
 
 const Login = () => {
   const { googleSignIn, signIn } = useContext(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+  let from = location.state?.from?.pathname || "/";
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -12,7 +16,8 @@ const Login = () => {
 
     signIn(email, password)
       .then(res => {
-        const user = res.user;
+        toast.success('Login Successful')
+        navigate(from, { replace: true });
       })
       .catch(e => console.error(e))
   }
@@ -22,17 +27,16 @@ const Login = () => {
     console.log('object');
     googleSignIn()
       .then(result => {
-        const user = result.user;
-        console.log(user)
-
+        toast.success('Login Successful')
+        navigate(from, { replace: true });
       })
       .catch(e => console.error(e))
   }
 
 
   return (
-    <div className="flex min-h-screen items-center justify-center py-12 px-4 sm:px-6 lg:px-8 ">
-      <div className="w-full max-w-md  bg-white p-10 rounded-xl py-20">
+    <div className="flex min-h-screen items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-[#f4f5f7]">
+      <div className="w-full max-w-md  bg-white p-10 rounded-xl py-20 shadow-lg">
         <div>
 
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Sign in to your account</h2>
@@ -58,7 +62,9 @@ const Login = () => {
             </div>
 
             <div className="text-sm">
-              <Link href="#" className="font-medium text-indigo-600 hover:text-indigo-500">Forgot your password?</Link>
+              <p className="font-medium  ">New to UsedAuto?
+                <Link className='ml-2 text-indigo-600 hover:text-indigo-500' to='/signup'>Sign Up</Link>
+              </p>
             </div>
           </div>
 
@@ -75,7 +81,7 @@ const Login = () => {
           </div>
         </form>
 
-        <button onSubmit={handleGoogleSignIn} className="group relative flex w-full justify-center rounded-md border border-transparent bg-primary py-2 px-4 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+        <button onClick={handleGoogleSignIn} className="group relative flex w-full justify-center rounded-md border border-transparent bg-primary py-2 px-4 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
           <span className="absolute inset-y-0 left-0 flex items-center pl-3">
 
             <svg className="h-5 w-5 text-white group-hover:text-white-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import car1 from '../../assets/car1.jpg';
 import car2 from '../../assets/car2.jpg';
 import car3 from '../../assets/car3.jpg';
@@ -16,7 +17,7 @@ const Banner = () => {
                         <p className="py-6 tracking-wider text-lg max-w-4xl">
 
                             We have more than a thousands of used cars for you to choose.</p>
-                        <button className="btn btn-primary text-xl tracking-wider font-normal text-white">See All Cars</button>
+                        <Link to='/category' className="btn btn-primary text-xl tracking-wider font-normal text-white">See All Cars</Link>
                     </div>
                 </div>
             </div>

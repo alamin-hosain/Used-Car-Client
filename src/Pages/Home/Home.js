@@ -7,7 +7,7 @@ import ContactUs from './ContactUs'
 
 const Home = () => {
     return (
-        <div>
+        <div className='bg-[#f4f5f7]'>
             < Banner />
             <Category />
             <Cars />

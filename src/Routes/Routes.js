@@ -4,6 +4,7 @@ import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login";
 import ErrorPage from "../Pages/Shared/Errorpage";
 import SignUp from "../Pages/SignUp";
+import UsedProducts from "../Pages/UsedProducts/UsedProducts";
 
 
 const router = createBrowserRouter([
@@ -17,6 +18,12 @@ const router = createBrowserRouter([
             },
             {
                 path: '/signup', element: <SignUp />
+            },
+            {
+                path: '/category', element: <UsedProducts />
+            },
+            {
+                path: '/category/:id', element: <UsedProducts />
             }
         ]
     }

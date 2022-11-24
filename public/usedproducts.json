@@ -1,6 +1,5 @@
 [
     {
-        "id": 1,
         "name": "New Honda Grace 2018",
         "img": "https://vroom.com.bd/wp-content/uploads/2022/10/188926784_1741784039363614_5066821106301498418_n.webp",
         "location": "Dhaka",
@@ -9,10 +8,10 @@
         "YearsOfUse": 3,
         "postedTime": "3pm",
         "sellersName": "Abdul GAffar",
-        "category": "Honda Grace"
+        "category": "Honda Grace",
+        "categoryId": 1
     },
     {
-        "id": 2,
         "name": "New Honda CR-V 2019",
         "img": "https://vroom.com.bd/wp-content/uploads/2022/10/image173937_b-798x466-1.jpg",
         "location": "Khulna",
@@ -21,10 +20,10 @@
         "YearsOfUse": 5,
         "postedTime": "4pm",
         "sellersName": "Mohammad Sharif",
-        "category": "Honda Grace"
+        "category": "Honda Grace",
+        "categoryId": 1
     },
     {
-        "id": 3,
         "name": "Reconditioned Nissan X-Trail 2017",
         "img": "https://vroom.com.bd/wp-content/uploads/2022/11/147527604_2382557648554366_959701256378537959_n.jpg",
         "location": "Bogura",
@@ -33,10 +32,10 @@
         "YearsOfUse": 2,
         "postedTime": "5pm",
         "sellersName": "Ismail Ali",
-        "category": "Nissan"
+        "category": "Nissan",
+        "categoryId": 2
     },
     {
-        "id": 4,
         "name": "Used and Recondition Nissan X-Trail 2020",
         "img": "https://vroom.com.bd/wp-content/uploads/2022/11/9dfb84d2-cd05-4410-8ea2-2575c57e0834..jpeg",
         "location": "Natore",
@@ -45,10 +44,11 @@
         "YearsOfUse": 3,
         "postedTime": "1pm",
         "sellersName": "Monjur Sarkar",
-        "category": "Nissan"
+        "category": "Nissan",
+        "categoryId": 2
     },
     {
-        "id": 5,
+      
         "name": "Reconditioned Toyota Axio 2018",
         "img": "https://vroom.com.bd/wp-content/uploads/2022/11/206ca8fb-97f2-4fa6-9832-fd28aa5c07db.jpg",
         "location": "Rajshahi",
@@ -57,10 +57,10 @@
         "YearsOfUse": 4,
         "postedTime": "2pm",
         "sellersName": "Abdullah Ali",
-        "category": "Toyota"
+        "category": "Toyota",
+        "categoryId": 3
     },
     {
-        "id": 6,
         "name": "Reconditioned Toyota Axio 2021",
         "img": "https://vroom.com.bd/wp-content/uploads/2022/11/fitted-3.jpg",
         "location": "Comilla",
@@ -69,6 +69,7 @@
         "YearsOfUse": 5,
         "postedTime": "3pm",
         "sellersName": "Mohsin Ali",
-        "category": "Toyota"
+        "category": "Toyota",
+        "categoryId": 3
     }
 ]

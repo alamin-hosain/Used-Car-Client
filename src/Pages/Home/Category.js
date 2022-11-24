@@ -28,7 +28,7 @@ const Category = () => {
                 {
                     categories.map((category, idx) =>
 
-                        <div className='flex flex-col items-center justify-center bg-white shadow-sm p-12 hover:bg-primary cursor-pointer hover:text-white' key={idx}>
+                        <div className='flex flex-col items-center justify-center bg-white shadow-sm p-12 hover:bg-primary cursor-pointer hover:text-white rounded-lg' key={idx}>
                             <div className=''>
                                 <img className='w-20' src={category.img} alt="" />
                             </div>
