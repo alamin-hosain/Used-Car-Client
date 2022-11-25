@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import car from '../../assets/car2.jpg';
 import Cars from '../Home/Cars';
 import SingleUsedCar from './SingleUsedCar';
-import './UsedProducts.module.css';
+import './useproducts.css';
 
 const UsedProducts = ({ singleCategoryProducts }) => {
     const [usedCars, setUsedCars] = useState([]);
@@ -30,7 +30,7 @@ const UsedProducts = ({ singleCategoryProducts }) => {
                             {
                                 uniqueCategories?.map((category, idx) =>
                                     <div key={idx}>
-                                        <NavLink to={`/category/${idx + 1}`} className='text-lg font-medium'>{category} </NavLink>
+                                        <NavLink to={`/category/${idx + 1}`} className='text-lg font-medium '>{category} </NavLink>
                                     </div>
                                 )
                             }

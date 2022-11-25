@@ -2,23 +2,25 @@ import React from 'react'
 import nissan from '../../assets/carlogo/nissan.ico';
 import honda from '../../assets/carlogo/honda.ico';
 import toyota from '../../assets/carlogo/toyota.ico';
+import { Link } from 'react-router-dom';
 
 const Category = () => {
     const categories = [
+
         {
             id: 1,
-            name: 'Toyota Vehicles',
-            img: toyota,
-        },
-        {
-            id: 2,
             name: 'Honda Grace',
             img: honda,
         },
         {
-            id: 3,
+            id: 2,
             name: 'Nissan',
             img: nissan,
+        },
+        {
+            id: 3,
+            name: 'Toyota Vehicles',
+            img: toyota,
         },
 
     ]
@@ -28,12 +30,12 @@ const Category = () => {
                 {
                     categories.map((category, idx) =>
 
-                        <div className='flex flex-col items-center justify-center bg-white shadow-sm p-12 hover:bg-primary cursor-pointer hover:text-white rounded-lg' key={idx}>
+                        <Link to={`/category/${idx + 1}`} className='flex flex-col items-center justify-center bg-white shadow-sm p-12 hover:bg-primary cursor-pointer hover:text-white rounded-lg' key={idx}>
                             <div className=''>
                                 <img className='w-20' src={category.img} alt="" />
                             </div>
                             <h3 className='text-xl font-semibold  mt-4 uppercase'>{category.name}</h3>
-                        </div>)
+                        </Link>)
                 }
             </div>
         </div>
