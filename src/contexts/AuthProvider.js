@@ -31,7 +31,9 @@ const AuthProvider = ({ children }) => {
 
     // 3. LogOut
     const logOut = () => {
-        return signOut(auth)
+        localStorage.removeItem('carToken');
+        return signOut(auth);
+
     }
 
     // 4. Google Sign In

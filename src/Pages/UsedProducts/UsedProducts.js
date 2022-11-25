@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom';
 import car from '../../assets/car2.jpg';
 import Cars from '../Home/Cars';
+import ProductBookModal from './ProductBookModal';
 import SingleUsedCar from './SingleUsedCar';
 import './useproducts.css';
 
 const UsedProducts = ({ singleCategoryProducts }) => {
     const [usedCars, setUsedCars] = useState([]);
-
+    const [selectedCar, setSelectedCar] = useState()
     useEffect(() => {
         fetch('http://localhost:5000/used-cars')
             .then(res => res.json())
@@ -15,6 +16,7 @@ const UsedProducts = ({ singleCategoryProducts }) => {
                 setUsedCars(data)
             })
     }, [])
+
 
 
     const categories = usedCars.map(car => car.category);
@@ -47,10 +49,11 @@ const UsedProducts = ({ singleCategoryProducts }) => {
                             <div className=' lg:w-[1140px] mx-auto'>
                                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-9 mt-20 mx-10 lg:mx-0 '>
                                     {
-                                        singleCategoryProducts?.map((singleCar, idx) => <SingleUsedCar key={idx} car={singleCar} />)
+                                        singleCategoryProducts?.map((singleCar, idx) => <SingleUsedCar key={idx} car={singleCar} setSelectedCar={setSelectedCar} />)
                                     }
                                 </div>
                             </div>
+
                         </div>
 
                         :
@@ -58,7 +61,12 @@ const UsedProducts = ({ singleCategoryProducts }) => {
                             <Cars />
                         </div>
 
+
                 }
+                {
+                    selectedCar && <ProductBookModal selectedCar={selectedCar} setSelectedCar={setSelectedCar} />
+                }
+
 
 
             </div>

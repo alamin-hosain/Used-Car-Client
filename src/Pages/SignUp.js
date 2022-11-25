@@ -1,6 +1,7 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
+import { setAuthToken } from '../api/auth';
 import { AuthContext } from '../contexts/AuthProvider';
 
 const SignUp = () => {
@@ -14,6 +15,7 @@ const SignUp = () => {
         const password = event.target.password.value;
         const name = event.target.name.value;
         const image = event.target.image.files[0];
+        const accountType = event.target.accountOption.value;
 
         const formData = new FormData();
         formData.append('image', image);
@@ -28,9 +30,12 @@ const SignUp = () => {
 
                 createUser(email, password)
                     .then(result => {
+
                         upDateUserInfo(name, image)
                             .then(() => { })
                             .catch(e => console.error(e))
+
+                        setAuthToken(result.user)
                         toast.success('User Created Successfully')
                         navigate('/')
                     })
@@ -40,12 +45,14 @@ const SignUp = () => {
 
             .catch(e => console.error(e))
 
+
     }
 
 
     const handleGoogleSignIn = () => {
         googleSignIn()
             .then(result => {
+                setAuthToken(result.user)
                 toast.success('User Created Successfully')
                 navigate('/')
 
@@ -62,13 +69,13 @@ const SignUp = () => {
                     <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Create a New Account</h2>
 
                 </div>
-                <form className="mt-12 space-y-6 mb-4" onSubmit={handleSubmit}>
+                <form className="mt-12 space-y-8 mb-4" onSubmit={handleSubmit}>
                     <input type="hidden" name="remember" value="true" />
                     <div className=" space-y-6 rounded-md shadow-sm">
 
                         <div>
                             <label htmlFor="email-address" className="sr-only">Your Name</label>
-                            <input name="name" type="name" className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" placeholder="Your Name" />
+                            <input name="name" type="name" className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" placeholder="Your Name" required />
                         </div>
 
                         <div>
@@ -79,10 +86,17 @@ const SignUp = () => {
                             <label htmlFor="password" className="sr-only">Password</label>
                             <input id="password" name="password" type="password" required className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" placeholder="Password" />
                         </div>
+                        <div>
+                            <label htmlFor="password" className="text-md">Choose Account Type</label>
+                            <select name='accountOption' className="select select-bordered w-full mt-2" required>
+                                <option value='Buyer' >Buyer</option>
+                                <option value='Seller' >Seller</option>
+                            </select>
+                        </div>
 
                         <div className='mb-4'>
                             <label htmlFor="password" className="text-lg">Add Profile Photo</label>
-                            <input name="image" type="file" className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm mt-2" />
+                            <input name="image" type="file" className="relative  block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm mt-2" />
                         </div>
                     </div>
 

@@ -1,6 +1,6 @@
-import React from 'react'
 
-const SingleUsedCar = ({ car }) => {
+const SingleUsedCar = ({ car, setSelectedCar }) => {
+
     const { name, YearsOfUse, category, id, img, location, originalPrice, resalePrice, postedTime, sellersName } = car;
 
     return (
@@ -20,8 +20,9 @@ const SingleUsedCar = ({ car }) => {
                     <div className=""><span className='text-lg font-semibold'>Original Price:</span> ${originalPrice}</div>
                     <div className=""><span className='text-lg font-semibold'>Resale Price:</span> ${resalePrice}</div>
                 </div>
-                <button className='btn btn-primary mt-4 text-white tracking-wider'>Book Now</button>
+                <label onClick={() => setSelectedCar(car)} htmlFor="carBookModal" className="btn btn-primary mt-4 text-white tracking-wider" >Book Now</label>
             </div>
+
         </div>
     )
 }
