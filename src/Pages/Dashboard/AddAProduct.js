@@ -3,6 +3,7 @@ import { format } from 'date-fns';
 import { DayPicker } from 'react-day-picker';
 import { AuthContext } from '../../contexts/AuthProvider';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const AddAProduct = () => {
     const { user } = useContext(AuthContext);
@@ -10,7 +11,6 @@ const AddAProduct = () => {
     const postedDate = format(selectDate, 'PP');
     const navigate = useNavigate();
     const imagebbkey = process.env.REACT_APP_Image_Key;
-    const [img, setImg] = useState();
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -47,26 +47,44 @@ const AddAProduct = () => {
             .then(res => res.json())
             .then(data => {
                 const img = data.data.url;
-                console.log(img)
-                setImg(img)
+                const products = {
+                    name,
+                    originalPrice,
+                    resalePrice,
+                    quality,
+                    phone,
+                    location,
+                    description,
+                    YearsOfUse,
+                    postedTime,
+                    img,
+                    sellersName,
+                    email: user.email,
+                    category,
+                    categoryId
+                }
 
+                fetch('http://localhost:5000/products', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(products)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.acknowledged) {
+                            event.target.reset();
+                        }
+
+                    })
+
+                toast.success('Product Added Successfully');
             })
 
-        const products = {
-            name,
-            originalPrice,
-            resalePrice,
-            quality,
-            phone,
-            location,
-            description,
-            YearsOfUse,
-            postedTime,
-            img,
-            sellersName,
-            category,
-            categoryId
-        }
+
+
+
 
 
 
@@ -76,7 +94,7 @@ const AddAProduct = () => {
     return (
         <div className='pb-10'>
             <h3 className="text-3xl ml-4 mb-6 text-center mt-4">Add a Product</h3>
-            <form className='flex flex-col justify-center items-center space-y-4' onSubmit={handleSubmit}>
+            <form className='flex flex-col justify-center items-center space-y-4 px-10 md:px-0' onSubmit={handleSubmit}>
                 <input type="text" name='name' placeholder="Product Name" className="input input-bordered w-full max-w-md" />
 
                 <input type="text" name='originalPrice' placeholder="Original Price $" className="input input-bordered w-full max-w-md" />
