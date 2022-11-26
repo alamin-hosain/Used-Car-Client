@@ -18,7 +18,7 @@ const DashboardLayout = () => {
 
     const role = user[0]?.user?.role;
 
-    console.log(role);
+
 
     return (
         <div className='lg:w-[1140px] mx-auto'>
