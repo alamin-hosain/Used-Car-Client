@@ -50,7 +50,7 @@ const AuthProvider = ({ children }) => {
     }
 
 
-    const authInfo = { user, loading, createUser, signIn, logOut, googleSignIn, upDateUserInfo };
+    const authInfo = { user, loading, setLoading, createUser, signIn, logOut, googleSignIn, upDateUserInfo };
 
 
     return (

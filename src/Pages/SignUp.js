@@ -33,7 +33,6 @@ const SignUp = () => {
 
                         upDateUserInfo(name, image)
                             .then(() => {
-
                                 setAuthToken(result.user, role)
                             })
                             .catch(e => console.error(e))
@@ -54,7 +53,8 @@ const SignUp = () => {
     const handleGoogleSignIn = () => {
         googleSignIn()
             .then(result => {
-                setAuthToken(result.user)
+                const role = 'Buyer';
+                setAuthToken(result.user, role)
                 toast.success('User Created Successfully')
                 navigate('/')
 

@@ -16,9 +16,6 @@ const DashboardLayout = () => {
         }
     })
 
-    const role = user[0]?.user?.role;
-
-
 
     return (
         <div className='lg:w-[1140px] mx-auto'>
@@ -40,8 +37,8 @@ const DashboardLayout = () => {
                                     <img src={loggedUser?.photoURL} alt='' />
                                 </div>
                             </div>
-                            <h3 className="text-xl mt-2 mb-2">{loggedUser?.displayName}</h3>
-                            <h3 className='bg-primary text-white px-10 rounded-md'>{role}</h3>
+                            <h3 className="text-xl mt-4 mb-2">{loggedUser?.displayName}</h3>
+                            <h3 className='bg-primary text-white px-10 rounded-md'>{user[0]?.role}</h3>
                         </div>
 
                         <li><Link to='/dashboard' className='mt-4 mb-2'> My Orders</Link></li>

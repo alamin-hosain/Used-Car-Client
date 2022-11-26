@@ -1,4 +1,6 @@
-import React, { useContext } from 'react'
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+import React, { useContext, useEffect, useState } from 'react'
 import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { setAuthToken } from '../api/auth';
@@ -9,6 +11,10 @@ const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
   let from = location.state?.from?.pathname || "/";
+  const { user } = useContext(AuthContext);
+  const [role, setRole] = useState('');
+
+
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -17,7 +23,16 @@ const Login = () => {
 
     signIn(email, password)
       .then(res => {
-        setAuthToken(res.user)
+
+
+        axios.get(`http://localhost:5000/users?email=${email}`)
+          .then(function (response) {
+            console.log(response.data[0].role);
+            const role = response.data[0].role;
+            setAuthToken(res.user, role)
+          })
+          .catch(e => console.error(e))
+
         toast.success('Login Successful')
         navigate(from, { replace: true });
       })
@@ -26,10 +41,10 @@ const Login = () => {
 
 
   const handleGoogleSignIn = () => {
-    console.log('object');
     googleSignIn()
       .then(result => {
-        setAuthToken(result.user)
+        const role = 'Buyer';
+        setAuthToken(result.user, role)
         toast.success('Login Successful')
         navigate(from, { replace: true });
       })
