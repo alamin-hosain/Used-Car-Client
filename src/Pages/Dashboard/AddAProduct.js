@@ -4,6 +4,7 @@ import { DayPicker } from 'react-day-picker';
 import { AuthContext } from '../../contexts/AuthProvider';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import { useQuery } from '@tanstack/react-query';
 
 const AddAProduct = () => {
     const { user } = useContext(AuthContext);
@@ -11,6 +12,18 @@ const AddAProduct = () => {
     const postedDate = format(selectDate, 'PP');
     const navigate = useNavigate();
     const imagebbkey = process.env.REACT_APP_Image_Key;
+
+    const { data: currentUser, refetch } = useQuery({
+        queryKey: ['seller'],
+        queryFn: async () => {
+            const res = await fetch(`http://localhost:5000/users?email=${user?.email}`);
+            const data = await res.json();
+            return data;
+        }
+    });
+
+    const sellerStatus = currentUser[0]?.status;
+
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -61,7 +74,8 @@ const AddAProduct = () => {
                     sellersName,
                     email: user.email,
                     category,
-                    categoryId
+                    categoryId,
+                    status: sellerStatus,
                 }
 
                 fetch('http://localhost:5000/products', {

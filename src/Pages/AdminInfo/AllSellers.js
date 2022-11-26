@@ -38,22 +38,27 @@ const AllSellers = () => {
 
 
     const handleVerify = seller => {
+        console.log(seller)
         const userStatus = {
             status: 'Verified'
         };
-        fetch(`http://localhost:5000/allsellers/${seller?.email}`, {
+        fetch(`http://localhost:5000/allsellers?email=${seller?.email}`, {
             method: 'PUT',
             headers: {
-                'content-type': 'application/json'
+                'Content-Type': 'application/json',
             },
-            body: JSON.stringify(userStatus)
+            body: JSON.stringify(userStatus),
         })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.acknowledged) {
+                    toast.success('Verified Successfully');
+                    refetch();
+                }
             })
     }
 
+    console.log(sellersInDb);
 
     return (
         <div className='mx-10'>
@@ -79,7 +84,10 @@ const AllSellers = () => {
                                 <td>{seller.email}</td>
                                 <td><button onClick={() => handleDelete(seller)} className='btn bg-red-600 text-white border-none btn-xs'>Delete</button></td>
                                 <td>
-                                    <button onClick={() => handleVerify(seller)} className='btn bg-green-600 text-white border-none btn-xs'>Click To Verify</button>
+                                    {
+                                        seller?.status === 'Verified' ? <label className='btn bg-green-600 text-white border-none btn-xs'>Verified</label> :
+                                            <button onClick={() => handleVerify(seller)} className='btn bg-red-600 text-white border-none btn-xs'>Click To Verify</button>
+                                    }
                                 </td>
                             </tr>
                         )

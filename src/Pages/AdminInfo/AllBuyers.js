@@ -26,7 +26,6 @@ const AllBuyers = () => {
                         <th>Name</th>
                         <th>Email</th>
                         <th>Action</th>
-                        <th>Verify</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,9 +36,7 @@ const AllBuyers = () => {
                                 <td>{buyer.displayName}</td>
                                 <td>{buyer.email}</td>
                                 <td><button className='btn bg-red-600 text-white border-none btn-xs'>Delete</button></td>
-                                <td>
-                                    <button className='btn bg-green-600 text-white border-none btn-xs'>Click To Verify</button>
-                                </td>
+
                             </tr>
                         )
                     }

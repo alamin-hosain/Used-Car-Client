@@ -6,7 +6,7 @@ const Cars = () => {
 
 
     useEffect(() => {
-        fetch('usedproducts.json')
+        fetch('http://localhost:5000/used-cars')
             .then(res => res.json())
             .then(data => {
                 setCars(data)
