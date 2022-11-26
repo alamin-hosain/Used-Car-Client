@@ -44,16 +44,14 @@ const DashboardLayout = () => {
                             <h3 className='bg-primary text-white px-10 rounded-md'>{role}</h3>
                         </div>
 
-                        <li><Link to='/dashboard' className='mt-4'> My Orders</Link></li>
+                        <li><Link to='/dashboard' className='mt-4 mb-2'> My Orders</Link></li>
 
 
-                        <li><Link to='/dashboard/addaproduct'>Add a Product</Link></li>
-                        <li><Link to='/'>My Product</Link></li>
+                        <li><Link to='/dashboard/addaproduct' className='mb-2'>Add a Product</Link></li>
+                        <li><Link to='/dashboard/myproduct' className='mb-2'>My Product</Link></li>
 
-
-
-                        <li><Link to='/'>All Sellers</Link></li>
-                        <li><Link to='/'>All Buyers</Link></li>
+                        <li><Link to='/dashboard/allsellers' className='mb-2'>All Sellers</Link></li>
+                        <li><Link to='/dashboard/allbuyers'>All Buyers</Link></li>
 
 
                     </ul>

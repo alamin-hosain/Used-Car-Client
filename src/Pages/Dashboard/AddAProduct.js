@@ -80,6 +80,7 @@ const AddAProduct = () => {
                     })
 
                 toast.success('Product Added Successfully');
+                navigate('/dashboard/myproduct');
             })
 
 
