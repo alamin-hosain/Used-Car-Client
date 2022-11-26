@@ -1,13 +1,24 @@
-import React, { useContext } from 'react'
+import { useQuery } from '@tanstack/react-query'
+import React, { useContext, useEffect } from 'react'
 import { Link, Outlet } from 'react-router-dom'
 import { AuthContext } from '../contexts/AuthProvider'
 import Navbar from '../Pages/Shared/Navbar'
 
 const DashboardLayout = () => {
-    const { user } = useContext(AuthContext);
+    const { user: loggedUser } = useContext(AuthContext);
 
-    console.log(user)
+    const { data: user = [] } = useQuery({
+        queryKey: ['users'],
+        queryFn: async () => {
+            const res = await fetch(`http://localhost:5000/users?email=${loggedUser?.email}`);
+            const data = await res.json();
+            return data;
+        }
+    })
 
+    const role = user[0]?.user?.role;
+
+    console.log(role);
 
     return (
         <div className='lg:w-[1140px] mx-auto'>
@@ -23,21 +34,23 @@ const DashboardLayout = () => {
                     <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
 
                     <ul className="menu p-4 w-80 bg-base-100 text-base-content">
-                        <div className='flex flex-col justify-center items-center space-y-6 border-b-2 p-4 mt-10'>
+                        <div className='flex flex-col justify-center items-center border-b-2 p-4 mt-10'>
                             <div className="avatar">
                                 <div className="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                                    <img src="https://placeimg.com/192/192/people" />
+                                    <img src={loggedUser?.photoURL} alt='' />
                                 </div>
                             </div>
-                            <h3 className="text-xl">{user.displayName}</h3>
-                            <h3>Admin</h3>
+                            <h3 className="text-xl mt-2 mb-2">{loggedUser?.displayName}</h3>
+                            <h3 className='bg-primary text-white px-10 rounded-md'>{role}</h3>
                         </div>
 
-                        <li><Link to='/'> My Orders</Link></li>
+                        <li><Link to='/dashboard' className='mt-4'> My Orders</Link></li>
 
-                        <li><Link to='/'>Add a Product</Link></li>
+
+                        <li><Link to='/dashboard/addaproduct'>Add a Product</Link></li>
                         <li><Link to='/'>My Product</Link></li>
-                        <li><Link to='/'>My Buyers</Link></li>
+
+
 
                         <li><Link to='/'>All Sellers</Link></li>
                         <li><Link to='/'>All Buyers</Link></li>

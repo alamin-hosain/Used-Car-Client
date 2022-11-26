@@ -15,7 +15,7 @@ const SignUp = () => {
         const password = event.target.password.value;
         const name = event.target.name.value;
         const image = event.target.image.files[0];
-        const accountType = event.target.accountOption.value;
+        const role = event.target.accountOption.value;
 
         const formData = new FormData();
         formData.append('image', image);
@@ -32,10 +32,12 @@ const SignUp = () => {
                     .then(result => {
 
                         upDateUserInfo(name, image)
-                            .then(() => { })
+                            .then(() => {
+
+                                setAuthToken(result.user, role)
+                            })
                             .catch(e => console.error(e))
 
-                        setAuthToken(result.user)
                         toast.success('User Created Successfully')
                         navigate('/')
                     })

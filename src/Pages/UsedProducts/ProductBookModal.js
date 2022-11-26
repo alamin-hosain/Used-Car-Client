@@ -19,7 +19,8 @@ const ProductBookModal = ({ selectedCar, setSelectedCar }) => {
             resalePrice,
             originalPrice,
             phone,
-            location
+            location,
+            img
         }
 
         fetch('http://localhost:5000/booking', {
@@ -33,6 +34,10 @@ const ProductBookModal = ({ selectedCar, setSelectedCar }) => {
             .then(data => {
                 if (data.acknowledged) {
                     toast.success('Item Booking Confirmed');
+                    setSelectedCar('')
+                } else {
+                    const message = data.message;
+                    toast.error(message);
                     setSelectedCar('')
                 }
             })

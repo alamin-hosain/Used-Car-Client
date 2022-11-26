@@ -1,8 +1,20 @@
+import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useEffect } from 'react'
 import { AuthContext } from '../../../contexts/AuthProvider'
+import SingleOrder from './SingleOrder';
 
 const AllOrders = () => {
     const { user } = useContext(AuthContext);
+
+    const { data: booking = [], } = useQuery({
+        queryKey: ['booking'],
+        queryFn: async () => {
+            const res = await fetch(`http://localhost:5000/booking?email=${user.email}`);
+            const data = await res.json();
+            return data;
+        }
+    })
+
 
     return (
         <div className='mx-4'>
@@ -20,27 +32,9 @@ const AllOrders = () => {
                         </tr>
                     </thead>
                     <tbody>
-
-                        <tr>
-                            <th>1</th>
-                            <td>
-                                <div className="flex items-center space-x-3">
-                                    <div className="avatar">
-                                        <div className="mask mask-squircle w-12 h-12">
-                                            <img src="/tailwind-css-component-profile-2@56w.png" alt="Avatar Tailwind CSS Component" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                Zemlak, Daniel and Leannon
-                            </td>
-                            <td>Purple</td>
-                            <th>
-                                <button className="btn text-white btn-xs">Pay</button>
-                            </th>
-                        </tr>
-
+                        {
+                            booking?.map((book, i) => <SingleOrder key={book._id} book={book} idx={i} />)
+                        }
                     </tbody>
                 </table>
             </div>
