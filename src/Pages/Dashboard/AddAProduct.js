@@ -13,7 +13,7 @@ const AddAProduct = () => {
     const navigate = useNavigate();
     const imagebbkey = process.env.REACT_APP_Image_Key;
 
-    const { data: currentUser, refetch } = useQuery({
+    const { data: currentUser = [], refetch } = useQuery({
         queryKey: ['seller'],
         queryFn: async () => {
             const res = await fetch(`http://localhost:5000/users?email=${user?.email}`);
@@ -97,13 +97,8 @@ const AddAProduct = () => {
                 navigate('/dashboard/myproduct');
             })
 
-
-
-
-
-
-
     }
+
 
 
     return (

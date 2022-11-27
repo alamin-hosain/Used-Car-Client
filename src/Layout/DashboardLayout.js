@@ -16,6 +16,8 @@ const DashboardLayout = () => {
         }
     })
 
+    const role = user[0]?.role;
+
 
     return (
         <div className='lg:w-[1140px] mx-auto'>
@@ -41,14 +43,28 @@ const DashboardLayout = () => {
                             <h3 className='bg-primary text-white px-10 rounded-md'>{user[0]?.role}</h3>
                         </div>
 
-                        <li><Link to='/dashboard' className='mt-4 mb-2'> My Orders</Link></li>
+                        {
+                            role === 'Buyer' && <li><Link to='/dashboard/allorders' className='mt-4 mb-2'> My Orders</Link></li>
+                        }
 
 
-                        <li><Link to='/dashboard/addaproduct' className='mb-2'>Add a Product</Link></li>
-                        <li><Link to='/dashboard/myproduct' className='mb-2'>My Product</Link></li>
+                        {
+                            role === 'Seller' && <>
+                                <li><Link to='/dashboard/myproduct' className='mb-2 mt-2'>My Product</Link></li>
+                                <li><Link to='/dashboard/addaproduct' className='mb-2 '>Add a Product</Link></li>
+                                <li><Link to='/dashboard/advertisement' className='mb-2 '>My Advertised Product</Link></li>
 
-                        <li><Link to='/dashboard/allsellers' className='mb-2'>All Sellers</Link></li>
-                        <li><Link to='/dashboard/allbuyers'>All Buyers</Link></li>
+                            </>
+                        }
+
+                        {
+                            role === 'Admin' && <>
+                                <li><Link to='/dashboard/allsellers' className='mb-2 mt-2'>All Sellers</Link></li>
+                                <li><Link to='/dashboard/allbuyers' className='mb-2'>All Buyers</Link></li>
+                                <li><Link to='/dashboard/reporteditems'>Reported Items
+                                </Link></li>
+                            </>
+                        }
 
 
                     </ul>

@@ -7,7 +7,6 @@ import { async } from '@firebase/util';
 
 const AllSellers = () => {
     const { user, loading, setLoading } = useContext(AuthContext);
-    const [refresh, setRefresh] = useState(false);
 
     const { data: sellersInDb = [], refetch } = useQuery({
         queryKey: ['seller'],
@@ -38,7 +37,6 @@ const AllSellers = () => {
 
 
     const handleVerify = seller => {
-        console.log(seller)
         const userStatus = {
             status: 'Verified'
         };
@@ -58,7 +56,7 @@ const AllSellers = () => {
             })
     }
 
-    console.log(sellersInDb);
+
 
     return (
         <div className='mx-10'>

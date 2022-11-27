@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
+import toast from 'react-hot-toast';
 import { AuthContext } from '../../contexts/AuthProvider'
 
 const MyProduct = () => {
     const { user } = useContext(AuthContext);
-
-    const { data: products = [] } = useQuery({
+    const { data: products = [], refetch } = useQuery({
         queryKey: ['products'],
         queryFn: async () => {
             const res = await fetch(`http://localhost:5000/products?email=${user?.email}`);
@@ -14,6 +14,22 @@ const MyProduct = () => {
         }
     })
 
+    const handleAdvertise = product => {
+        fetch('http://localhost:5000/advertisement', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(product)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    toast.success('Advertisement Successfull');
+                    refetch()
+                }
+            })
+    }
 
 
     return (
@@ -40,7 +56,7 @@ const MyProduct = () => {
                                     <td>Unsold</td>
                                     <td>${product.resalePrice}</td>
                                     <td>
-                                        <button className='btn btn-xs'>Click To Advertise</button>
+                                        <button onClick={() => handleAdvertise(product)} className='btn btn-xs'>Click To Advertise</button>
                                     </td>
                                 </tr>
                             )

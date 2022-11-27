@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import { AuthContext } from '../../../contexts/AuthProvider'
 import SingleOrder from './SingleOrder';
 
@@ -9,11 +9,18 @@ const AllOrders = () => {
     const { data: booking = [], } = useQuery({
         queryKey: ['booking'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/booking?email=${user.email}`);
+            const res = await fetch(`http://localhost:5000/booking?email=${user?.email}`, {
+                headers: {
+                    'Content-type': 'application/json',
+                    authorization: `bearer ${localStorage.getItem('carToken')}`
+                }
+            });
             const data = await res.json();
             return data;
         }
     })
+
+    console.log(booking)
 
 
     return (
