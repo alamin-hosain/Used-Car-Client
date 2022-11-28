@@ -10,7 +10,7 @@ const Advertisement = () => {
     const { data: advertiseProducts = [], refetch, isLoading } = useQuery({
         queryKey: ['advertisement'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/advertisement?email=${user?.email}`, {
+            const res = await fetch(`https://b612-used-products-resale-server-side-alamin-hosain.vercel.app/advertisement?email=${user?.email}`, {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('carToken')}`
                 }
@@ -22,7 +22,7 @@ const Advertisement = () => {
 
 
     const handleDelete = (product) => {
-        fetch(`http://localhost:5000/advertisement/${product?._id}`, {
+        fetch(`https://b612-used-products-resale-server-side-alamin-hosain.vercel.app/advertisement/${product?._id}`, {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json'

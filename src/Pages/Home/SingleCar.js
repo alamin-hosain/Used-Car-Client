@@ -9,7 +9,7 @@ const SingleCar = ({ car, setSelectedCar }) => {
 
 
     const handleReport = car => {
-        fetch(`http://localhost:5000/report/${car?._id}`, {
+        fetch(`https://b612-used-products-resale-server-side-alamin-hosain.vercel.app/report/${car?._id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json',

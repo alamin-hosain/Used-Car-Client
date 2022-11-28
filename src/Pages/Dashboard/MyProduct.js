@@ -10,7 +10,7 @@ const MyProduct = () => {
     const { data: products = [], refetch } = useQuery({
         queryKey: ['products'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/products?email=${user?.email}`);
+            const res = await fetch(`https://b612-used-products-resale-server-side-alamin-hosain.vercel.app/products?email=${user?.email}`);
             const data = await res.json();
             return data;
         }
@@ -19,7 +19,7 @@ const MyProduct = () => {
     console.log(products)
 
     const handleAdvertise = product => {
-        fetch('http://localhost:5000/advertisement', {
+        fetch('https://b612-used-products-resale-server-side-alamin-hosain.vercel.app/advertisement', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -38,7 +38,7 @@ const MyProduct = () => {
 
 
     const handleDelete = (product) => {
-        fetch(`http://localhost:5000/products/${product?._id}`, {
+        fetch(`https://b612-used-products-resale-server-side-alamin-hosain.vercel.app/products/${product?._id}`, {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json'

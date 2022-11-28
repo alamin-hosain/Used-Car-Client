@@ -8,7 +8,7 @@ const Cars = () => {
 
 
     useEffect(() => {
-        fetch('http://localhost:5000/used-cars')
+        fetch('https://b612-used-products-resale-server-side-alamin-hosain.vercel.app/used-cars')
             .then(res => res.json())
             .then(data => {
                 setCars(data)

@@ -15,7 +15,7 @@ const CheckOut = ({ data }) => {
 
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
-        fetch("http://localhost:5000/payment", {
+        fetch("https://b612-used-products-resale-server-side-alamin-hosain.vercel.app/payment", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ resalePrice }),
@@ -81,7 +81,7 @@ const CheckOut = ({ data }) => {
             }
 
 
-            fetch('http://localhost:5000/payments', {
+            fetch('https://b612-used-products-resale-server-side-alamin-hosain.vercel.app/payments', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -98,7 +98,7 @@ const CheckOut = ({ data }) => {
                         // const itemSold = {
                         //     isSold: "Sold"
                         // }
-                        // fetch(`http://localhost:5000/used-cars/${selectedCarId}`, {
+                        // fetch(`https://b612-used-products-resale-server-side-alamin-hosain.vercel.app/used-cars/${selectedCarId}`, {
                         //     method: 'PUT',
                         //     headers: {
                         //         'content-type': 'application/json'

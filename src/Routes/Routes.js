@@ -44,7 +44,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/category/:id', element: <PrivateRoute><SingleCategory />,</PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/category/${params.id}`)
+                loader: ({ params }) => fetch(`https://b612-used-products-resale-server-side-alamin-hosain.vercel.app/category/${params.id}`)
             }
         ],
 
@@ -59,7 +59,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/allorders/:id', element: <BuyerRoute><Payment /></BuyerRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/booking/${params.id}`)
+                loader: ({ params }) => fetch(`https://b612-used-products-resale-server-side-alamin-hosain.vercel.app/booking/${params.id}`)
             },
             {
                 path: '/dashboard/addaproduct', element: <SellerRoute> <AddAProduct /></SellerRoute>

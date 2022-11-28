@@ -11,7 +11,7 @@ const AllSellers = () => {
     const { data: sellersInDb = [], refetch } = useQuery({
         queryKey: ['seller'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/allsellers');
+            const res = await fetch('https://b612-used-products-resale-server-side-alamin-hosain.vercel.app/allsellers');
             const data = await res.json();
             return data;
         }
@@ -20,7 +20,7 @@ const AllSellers = () => {
 
     const handleDelete = seller => {
 
-        fetch(`http://localhost:5000/allsellers/${seller?.email}`, {
+        fetch(`https://b612-used-products-resale-server-side-alamin-hosain.vercel.app/allsellers/${seller?.email}`, {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json'
@@ -40,7 +40,7 @@ const AllSellers = () => {
         const userStatus = {
             status: 'Verified'
         };
-        fetch(`http://localhost:5000/allsellers?email=${seller?.email}`, {
+        fetch(`https://b612-used-products-resale-server-side-alamin-hosain.vercel.app/allsellers?email=${seller?.email}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

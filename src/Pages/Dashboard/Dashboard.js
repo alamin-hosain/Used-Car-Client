@@ -9,7 +9,7 @@ const Dashboard = () => {
     const { data: user = [] } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/users?email=${loggedUser?.email}`);
+            const res = await fetch(`https://b612-used-products-resale-server-side-alamin-hosain.vercel.app/users?email=${loggedUser?.email}`);
             const data = await res.json();
             return data;
         }

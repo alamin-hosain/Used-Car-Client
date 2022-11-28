@@ -10,7 +10,7 @@ const Advertise = () => {
     const { data: advertiseProducts = [], isLoading } = useQuery({
         queryKey: ['advertisement'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/advertise');
+            const res = await fetch('https://b612-used-products-resale-server-side-alamin-hosain.vercel.app/advertise');
             const data = await res.json();
             return data;
         }

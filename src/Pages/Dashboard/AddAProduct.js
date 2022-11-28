@@ -16,7 +16,7 @@ const AddAProduct = () => {
     const { data: currentUser = [], refetch } = useQuery({
         queryKey: ['seller'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/users?email=${user?.email}`);
+            const res = await fetch(`https://b612-used-products-resale-server-side-alamin-hosain.vercel.app/users?email=${user?.email}`);
             const data = await res.json();
             return data;
         }
@@ -78,7 +78,7 @@ const AddAProduct = () => {
                     status: sellerStatus,
                 }
 
-                fetch('http://localhost:5000/products', {
+                fetch('https://b612-used-products-resale-server-side-alamin-hosain.vercel.app/products', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'

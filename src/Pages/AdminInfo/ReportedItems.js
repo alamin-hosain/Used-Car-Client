@@ -7,7 +7,7 @@ const ReportedItems = () => {
     const { data: reports = [], refetch } = useQuery({
         queryKey: ['reports'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/report');
+            const res = await fetch('https://b612-used-products-resale-server-side-alamin-hosain.vercel.app/report');
             const data = await res.json();
             return data;
         }
@@ -16,7 +16,7 @@ const ReportedItems = () => {
 
 
     const handleReportDelete = (report) => {
-        fetch(`http://localhost:5000/report/${report?._id}`, {
+        fetch(`https://b612-used-products-resale-server-side-alamin-hosain.vercel.app/report/${report?._id}`, {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json'
@@ -33,7 +33,7 @@ const ReportedItems = () => {
 
 
     const handleReportProductDelete = report => {
-        fetch(`http://localhost:5000/products/${report?._id}`, {
+        fetch(`https://b612-used-products-resale-server-side-alamin-hosain.vercel.app/products/${report?._id}`, {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json'

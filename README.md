@@ -4,9 +4,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## This site is hosted ON fireBase.
 
-Check Out FireBase Live Site Here: [b6a11-service-review-client-side](https://dentist-service-assignment.web.app/).
+Check Out FireBase Live Site Here: [b612-used-products-resale-client-side-alamin-hosain](https://usedcar-93a48.web.app).
 
-## This site is built with Tailwind and Daisy UI.
+## This site Server site is hosting on Vercel:
+
+Check Server site:[b612-used-products-resale-server-side-alamin-hosain](https://b612-used-products-resale-server-side-alamin-hosain.vercel.app).
 
 Tailwind CSS Link: [Tailwind](https://tailwindcss.com/).
 Daisy Ui LInk: [DaisyUI](https://daisyui.com/).

@@ -23,7 +23,7 @@ const ProductBookModal = ({ selectedCar, setSelectedCar }) => {
             img
         }
 
-        fetch('http://localhost:5000/booking', {
+        fetch('https://b612-used-products-resale-server-side-alamin-hosain.vercel.app/booking', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

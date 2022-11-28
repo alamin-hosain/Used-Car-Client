@@ -10,7 +10,7 @@ const AllBuyers = () => {
     const { data: buyersInDb = [], refetch } = useQuery({
         queryKey: ['buyer'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/allbuyers?email=${user?.email}`, {
+            const res = await fetch(`https://b612-used-products-resale-server-side-alamin-hosain.vercel.app/allbuyers?email=${user?.email}`, {
                 headers: {
                     'content-type': 'application/json',
                     authorization: `bearer ${localStorage.getItem('carToken')}`
@@ -23,7 +23,7 @@ const AllBuyers = () => {
 
 
     const handleDelete = buyer => {
-        fetch(`http://localhost:5000/allbuyers/${buyer?.email}`, {
+        fetch(`https://b612-used-products-resale-server-side-alamin-hosain.vercel.app/allbuyers/${buyer?.email}`, {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json',

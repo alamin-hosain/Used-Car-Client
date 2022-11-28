@@ -23,7 +23,7 @@ const Login = () => {
 
     signIn(email, password)
       .then(res => {
-        axios.get(`http://localhost:5000/users?email=${email}`)
+        axios.get(`https://b612-used-products-resale-server-side-alamin-hosain.vercel.app/users?email=${email}`)
           .then(function (response) {
             const role = response.data[0].role;
             setAuthToken(res.user, role)

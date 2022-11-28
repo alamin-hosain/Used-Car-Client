@@ -10,7 +10,7 @@ const AllOrders = () => {
     const { data: booking = [], refetch } = useQuery({
         queryKey: ['booking'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/booking?email=${user?.email}`, {
+            const res = await fetch(`https://b612-used-products-resale-server-side-alamin-hosain.vercel.app/booking?email=${user?.email}`, {
                 headers: {
                     'Content-type': 'application/json',
                     authorization: `bearer ${localStorage.getItem('carToken')}`
@@ -22,7 +22,7 @@ const AllOrders = () => {
     })
 
     const handleDelete = book => {
-        fetch(`http://localhost:5000/booking/${book?._id}`, {
+        fetch(`https://b612-used-products-resale-server-side-alamin-hosain.vercel.app/booking/${book?._id}`, {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json'
