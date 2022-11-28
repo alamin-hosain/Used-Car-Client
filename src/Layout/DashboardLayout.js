@@ -18,7 +18,7 @@ const DashboardLayout = () => {
 
     const role = user[0]?.role;
 
-
+    console.log(loggedUser.photoURL);
     return (
         <div className='lg:w-[1140px] mx-auto'>
             <Navbar />

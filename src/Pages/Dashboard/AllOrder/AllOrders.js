@@ -1,12 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react'
+import toast from 'react-hot-toast';
 import { AuthContext } from '../../../contexts/AuthProvider'
 import SingleOrder from './SingleOrder';
 
 const AllOrders = () => {
     const { user } = useContext(AuthContext);
 
-    const { data: booking = [], } = useQuery({
+    const { data: booking = [], refetch } = useQuery({
         queryKey: ['booking'],
         queryFn: async () => {
             const res = await fetch(`http://localhost:5000/booking?email=${user?.email}`, {
@@ -20,7 +21,22 @@ const AllOrders = () => {
         }
     })
 
-    console.log(booking)
+    const handleDelete = book => {
+        fetch(`http://localhost:5000/booking/${book?._id}`, {
+            method: 'DELETE',
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    refetch();
+                    toast.success('Deleted Successfully')
+                }
+
+            })
+    }
 
 
     return (
@@ -36,11 +52,12 @@ const AllOrders = () => {
                             <th>Car Name</th>
                             <th>Price</th>
                             <th>Payment</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            booking?.map((book, i) => <SingleOrder key={book._id} book={book} idx={i} />)
+                            booking?.map((book, i) => <SingleOrder key={book._id} book={book} idx={i} handleDelete={handleDelete} />)
                         }
                     </tbody>
                 </table>

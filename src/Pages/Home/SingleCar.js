@@ -1,8 +1,30 @@
 import React from 'react'
 import verify from '../../assets/verification.png';
+import { FaFlag } from "react-icons/fa";
+import toast from 'react-hot-toast';
 
 const SingleCar = ({ car, setSelectedCar }) => {
-    const { name, YearsOfUse, category, id, img, location, originalPrice, resalePrice, postedTime, sellersName, status } = car;
+    const { name, YearsOfUse, img, location, originalPrice, resalePrice, postedTime, sellersName, status } = car;
+
+
+
+    const handleReport = car => {
+        fetch(`http://localhost:5000/report/${car?._id}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(car)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    toast.success('Reported to Admin Success, Admin will review and take action')
+                } else {
+                    toast.error(data.message)
+                }
+            })
+    }
 
 
     return (
@@ -28,6 +50,11 @@ const SingleCar = ({ car, setSelectedCar }) => {
                     <div className=""><span className='text-lg font-semibold'>Original Price:</span> ${originalPrice}</div>
                     <div className=""><span className='text-lg font-semibold'>Resale Price:</span> ${resalePrice}</div>
                 </div>
+                <div onClick={() => handleReport(car)} className='absolute top-5 left-5 bg-red-600 text-white rounded-full px-4 py-1 flex  items-center cursor-pointer hover:bg-black'>
+                    <span className='mr-3'><FaFlag /></span>
+                    <p>Report</p>
+                </div>
+
                 <label onClick={() => setSelectedCar(car)} htmlFor="carBookModal" className="btn btn-primary mt-4 text-white tracking-wider" >Book Now</label>
             </div>
         </div>

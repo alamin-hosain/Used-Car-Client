@@ -1,10 +1,55 @@
+import { useQuery } from '@tanstack/react-query'
 import React from 'react'
+import toast from 'react-hot-toast';
 
 const ReportedItems = () => {
 
-    const handleDelete = () => {
+    const { data: reports = [], refetch } = useQuery({
+        queryKey: ['reports'],
+        queryFn: async () => {
+            const res = await fetch('http://localhost:5000/report');
+            const data = await res.json();
+            return data;
+        }
+    })
 
+
+
+    const handleReportDelete = (report) => {
+        fetch(`http://localhost:5000/report/${report?._id}`, {
+            method: 'DELETE',
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    refetch()
+                    toast.success('Deleted Successfully')
+                }
+            })
     }
+
+
+    const handleReportProductDelete = report => {
+        fetch(`http://localhost:5000/products/${report?._id}`, {
+            method: 'DELETE',
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    refetch()
+                    toast.success('Deleted Successfully')
+                }
+            })
+    }
+
+
+
     return (
         <div>
             <div className='mx-10'>
@@ -17,20 +62,31 @@ const ReportedItems = () => {
                         <tr>
                             <th>Image</th>
                             <th>Product Name</th>
-                            <th>Email</th>
+                            <th>Seller Name</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
+                        {
+                            reports &&
+                            reports?.map(report =>
 
-                        <tr>
-                            <th>1</th>
-                            <td>name</td>
-                            <td>Seller Name</td>
-                            <td><button onClick={() => handleDelete()} className='btn bg-red-600 text-white border-none btn-xs'>Delete</button></td>
+                                <tr key={report._id}>
+                                    <th>
+                                        <div className="avatar">
+                                            <div className="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                                                <img src={report.img} alt='' />
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <td>{report.name}</td>
+                                    <td>{report.sellersName}</td>
+                                    <td><button onClick={() => handleReportDelete(report)} className='btn bg-red-600 text-white border-none btn-xs'>Delete</button></td>
 
-                        </tr>
 
+                                </tr>
+                            )
+                        }
                     </tbody>
 
                 </table>

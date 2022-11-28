@@ -16,6 +16,8 @@ const MyProduct = () => {
         }
     })
 
+    console.log(products)
+
     const handleAdvertise = product => {
         fetch('http://localhost:5000/advertisement', {
             method: 'POST',
@@ -71,7 +73,7 @@ const MyProduct = () => {
                     </thead>
                     <tbody>
                         {
-                            products.map((product, i) =>
+                            products?.map((product, i) =>
                                 <tr key={i}>
                                     <th>{i + 1}</th>
                                     <td>{product.name}</td>

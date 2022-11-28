@@ -1,12 +1,12 @@
 import React from 'react'
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 
-const SingleOrder = ({ book, idx }) => {
+const SingleOrder = ({ book, idx, handleDelete }) => {
     const { carName, resalePrice, img } = book;
 
-    const handlePay = book => {
-        console.log(book)
-    }
+
+
 
     return (
         <tr>
@@ -27,12 +27,15 @@ const SingleOrder = ({ book, idx }) => {
             <th>
                 {
                     book.resalePrice && !book.paid &&
-                    <Link to={`/dashboard/allorders/${book._id}`}><button onClick={() => handlePay(book)} className="btn text-white btn-xs">Pay</button></Link>
+                    <Link to={`/dashboard/allorders/${book._id}`}><button className="btn text-white btn-xs">Pay</button></Link>
                 }
                 {
                     book.resalePrice && book.paid &&
-                    <button onClick={() => handlePay(book)} className="btn text-white btn-xs bg-green-600 border-0">Paid</button>
+                    <button className="btn text-white btn-xs bg-green-600 border-0">Paid</button>
                 }
+            </th>
+            <th>
+                <button onClick={() => handleDelete(book)} className="btn btn-xs bg-red-600 border-0 text-white">Delete</button>
             </th>
         </tr>
     )
