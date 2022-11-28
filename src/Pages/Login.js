@@ -23,11 +23,8 @@ const Login = () => {
 
     signIn(email, password)
       .then(res => {
-
-
         axios.get(`http://localhost:5000/users?email=${email}`)
           .then(function (response) {
-            console.log(response.data[0].role);
             const role = response.data[0].role;
             setAuthToken(res.user, role)
           })

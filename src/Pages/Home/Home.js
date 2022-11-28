@@ -1,3 +1,4 @@
+
 import React from 'react'
 import Advertise from './Advertise'
 import Banner from './Banner'
@@ -6,6 +7,7 @@ import Category from './Category'
 import ContactUs from './ContactUs'
 
 const Home = () => {
+
     return (
         <div className='bg-[#f4f5f7]'>
             < Banner />

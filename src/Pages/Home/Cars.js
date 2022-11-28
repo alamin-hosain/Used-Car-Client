@@ -16,7 +16,6 @@ const Cars = () => {
     }, [])
 
 
-
     return (
         <div className='mt-20 lg:w-[1140px] mx-auto'>
             <div className="divider text-3xl font-bold text-center">LATEST USED VEHICLES</div>

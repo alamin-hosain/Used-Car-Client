@@ -89,12 +89,14 @@ const AddAProduct = () => {
                     .then(data => {
                         if (data.acknowledged) {
                             event.target.reset();
+                            toast.success('Product Added Successfully');
+                            navigate('/dashboard/myproduct');
                         }
+
 
                     })
 
-                toast.success('Product Added Successfully');
-                navigate('/dashboard/myproduct');
+
             })
 
     }

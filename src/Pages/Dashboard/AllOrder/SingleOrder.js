@@ -1,7 +1,12 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 const SingleOrder = ({ book, idx }) => {
     const { carName, resalePrice, img } = book;
+
+    const handlePay = book => {
+        console.log(book)
+    }
 
     return (
         <tr>
@@ -20,7 +25,14 @@ const SingleOrder = ({ book, idx }) => {
             </td>
             <td>${resalePrice}</td>
             <th>
-                <button className="btn text-white btn-xs">Pay</button>
+                {
+                    book.resalePrice && !book.paid &&
+                    <Link to={`/dashboard/allorders/${book._id}`}><button onClick={() => handlePay(book)} className="btn text-white btn-xs">Pay</button></Link>
+                }
+                {
+                    book.resalePrice && book.paid &&
+                    <button onClick={() => handlePay(book)} className="btn text-white btn-xs bg-green-600 border-0">Paid</button>
+                }
             </th>
         </tr>
     )

@@ -1,11 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react'
+import toast from 'react-hot-toast';
 import { AuthContext } from '../../contexts/AuthProvider';
+import Spinner from '../../utils/Spinner';
 
 const Advertisement = () => {
     const { user } = useContext(AuthContext);
 
-    const { data: advertiseProducts = [], refetch } = useQuery({
+    const { data: advertiseProducts = [], refetch, isLoading } = useQuery({
         queryKey: ['advertisement'],
         queryFn: async () => {
             const res = await fetch(`http://localhost:5000/advertisement?email=${user?.email}`, {
@@ -18,12 +20,31 @@ const Advertisement = () => {
         }
     })
 
-    console.log(advertiseProducts)
+
+    const handleDelete = (product) => {
+        fetch(`http://localhost:5000/advertisement/${product?._id}`, {
+            method: 'DELETE',
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    toast.success('Advertised Item deleted Successfully');
+                    refetch()
+                }
+            })
+    }
+
+    if (isLoading) {
+        return <Spinner />
+    }
 
     return (
         <div>
             <div>
-                <h3 className="text-3xl mb-6 mt-4 ml-10">My Products</h3>
+                <h3 className="text-3xl mb-6 mt-4 ml-10">My Advertised Products</h3>
                 <div className="overflow-x-auto mx-10">
                     <table className="table w-full">
 
@@ -31,21 +52,20 @@ const Advertisement = () => {
                             <tr>
                                 <th></th>
                                 <th>Product Name</th>
-                                <th>Sales Status</th>
                                 <th>Price</th>
-                                <th>Advertise</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             {
+                                advertiseProducts.length !== '' &&
                                 advertiseProducts?.map((product, i) =>
                                     <tr key={i}>
                                         <th>{i + 1}</th>
                                         <td>{product.name}</td>
-                                        <td>Unsold</td>
                                         <td>${product.resalePrice}</td>
                                         <td>
-                                            <button className='btn btn-xs'>Click To Advertise</button>
+                                            <button onClick={() => handleDelete(product)} className='btn btn-xs bg-red-600 border-0 text-white'>Product Sold? Delete</button>
                                         </td>
                                     </tr>
                                 )

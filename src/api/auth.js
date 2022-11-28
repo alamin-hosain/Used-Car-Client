@@ -1,6 +1,6 @@
 export const setAuthToken = (user, role) => {
     const currentUser = {
-        emaiL: user.email,
+        email: user.email,
         role: role,
         displayName: user.displayName,
         photoURL: user.photoURL,

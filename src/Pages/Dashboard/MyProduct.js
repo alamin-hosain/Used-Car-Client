@@ -1,10 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useState } from 'react'
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider'
 
 const MyProduct = () => {
     const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
     const { data: products = [], refetch } = useQuery({
         queryKey: ['products'],
         queryFn: async () => {
@@ -27,6 +29,24 @@ const MyProduct = () => {
                 if (data.acknowledged) {
                     toast.success('Advertisement Successfull');
                     refetch()
+                    navigate('/dashboard/advertisement')
+                }
+            })
+    }
+
+
+    const handleDelete = (product) => {
+        fetch(`http://localhost:5000/products/${product?._id}`, {
+            method: 'DELETE',
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    toast.success(`Car ${product.name} deleted Successfully`);
+                    refetch()
                 }
             })
     }
@@ -43,8 +63,10 @@ const MyProduct = () => {
                             <th></th>
                             <th>Product Name</th>
                             <th>Sales Status</th>
-                            <th>Price</th>
+                            <th>Action</th>
                             <th>Advertise</th>
+
+                            <th>Price</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -54,10 +76,14 @@ const MyProduct = () => {
                                     <th>{i + 1}</th>
                                     <td>{product.name}</td>
                                     <td>Unsold</td>
-                                    <td>${product.resalePrice}</td>
                                     <td>
-                                        <button onClick={() => handleAdvertise(product)} className='btn btn-xs'>Click To Advertise</button>
+                                        <button onClick={() => handleDelete(product)} className='btn btn-xs bg-red-600 border-0 text-white 	'>Delete</button>
                                     </td>
+                                    <td>
+                                        <button onClick={() => handleAdvertise(product)} className='btn btn-xs 	'>Click To Advertise</button>
+                                    </td>
+
+                                    <td>${product.resalePrice}</td>
                                 </tr>
                             )
                         }
